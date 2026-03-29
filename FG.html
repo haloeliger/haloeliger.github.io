@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" href="mystyle.css">
+</head>
+
+<body>
+
+<main>
+This page belongs to
+<a href="./index.html">Andi Loeliger's home page</a>.
+
+
+<br>
+<br>
+<hr>
+
+
+<!-- 
+<h2>About Factor Graphs</h2>
+ -->
+<h2>Model-Based Signal Processing with Factor Graphs</h2>
+
+Factor graphs allow a unified approach 
+to a wide variety of structured models and related algorithms.
+Much of my research, and of my PhD students' at ETH,
+was about further developing the factor graph approach to signal processing.
+
+<br>
+<br>
+
+The original factor graphs were bipartite with variable nodes and factor nodes:
+<ul>
+<li><p>
+    B.J. Frey, F.R. Kschischang, H.-A. L., and N. Wiberg,<br>
+    <strong>Factor graphs and algorithms,</strong><br>
+    <em>Proc. 35th Allerton Conf. on Communications, Control, and Computing,</em>
+    Monticello, Illinois, 1997, pp. 666-680.
+    <br><a href="./papers/1997Allerton.pdf">PDF</a>
+    </p></li>
+<li><p>
+    F.R. Kschischang, B.J. Frey, and H.-A. L.,<br>
+    <strong>Factor graphs and the sum-product algorithm,</strong><br>
+    <em>IEEE Trans. Inform. Theory,</em> 
+    vol. 47, pp. 498-519, Feb. 2001.
+    <br><a href="./papers/2001FG.pdf">PDF</a>
+    </p></li>
+</ul>
+However, Forney's work (including "Codes on graphs: normal realizations", 2002, 
+and "Codes on graphs: duality and MacWilliams identities", 2011) 
+made it clear (to me) that variables should be represented by edges rather than nodes,
+which is the convention I have been using ever since.
+In fact, I have long been considering the earlier (bipartite) version 
+of factor graphs as a deplorable blunder.
+
+<br>
+<br>
+
+The primary early references on the factor graph approach to signal processing are
+<ul>
+<li><p>
+    H.-A. L.,<br>
+    <strong>An introduction to factor graphs,</strong><br>
+    <em>IEEE Signal Proc. Mag,</em> Jan. 2004, pp. 28-41.
+    <br><a href="http://www.isiweb.ee.ethz.ch/papers/arch/aloe-2004-spmagffg.pdf">PDF</a>
+    </p></li>
+<li><p>
+    H.-A. L., J. Dauwels, J. Hu, S. Korl, Li Ping, and F. Kschischang,<br>
+    <strong>The factor graph approach to model-based signal processing,</strong><br>
+    <em>Proceedings of the IEEE,</em>
+    vol. 95, no. 6, pp. 1295-1322, June 2007.
+    <br><a href="./papers/2007fgasp.pdf">PDF</a>
+    </p></li>
+</ul>
+Much has been happening since; for example:
+<ul>
+<li><p>
+    J. Dauwels, A. Eckford, S. Korl, and H.-A. L.,<br>
+    <strong>Expectation maximization as message passing - 
+    Part I: principles and Gaussian messages,</strong><br>
+    <a href="http://arxiv.org/abs/0910.2832">arXiv:0910.2832</a>, 2009.
+    </p></li>
+<li><p>
+    Ch. Reller, M.V.R.S. Devarakonda, and H.-A. L.,<br>
+    <strong>Glue factors, likelihood computation, and filtering in state space models,</strong><br>
+    <em>Proc. 50th Annual Allerton Conference on Communication, Control, and Computing,</em>
+    Monticello, Illinois, USA, Oct. 1-5, 2012, pp. 686-689.
+    <br><a href="http://dx.doi.org/10.1109/Allerton.2012.6483284">IEEE Xplore</a>
+    / <a href="./papers/2012_Allerton.pdf">preprint</a>    
+    </p></li>
+<li><p>
+    L. Bolliger, H.-A. L., and C. Vogel,<br>
+    <strong>LMMSE estimation and interpolation of continuous-time signals from discrete-time samples 
+    using factor graphs,</strong><br>
+    <a href="http://arxiv.org/abs/1301.4793">arXiv:1301.4793</a>, 2013.
+    </p></li>
+<li><p>
+    H.-A. L. and Ch. Reller,<br>
+    <strong>Signal processing with factor graphs: beamforming and Hilbert transform,</strong><br>
+    <em>2013 Information Theory and Applications Workshop (ITA),</em>
+    San Diego, CA, Feb. 10-15, 2013.
+    <br><a href="http://dx.doi.org/10.1109/ITA.2013.6502952">IEEE Xplore</a>
+    / <a href="./papers/2013_ITA.pdf">preprint</a>
+    </p></li>
+<li><p>
+    S. Maran&ograve;, D. F&auml;h, and H.-A. L.,<br>
+    <strong>A state-space approach for the analysis of wave and diffusion fields,</strong><br>
+    <em>40th IEEE Int. Conf. on Acoustics, Speech and Signal Processing (ICASSP),</em>
+    Brisbane, Australia, April 19-24, 2015.
+    <br><a href="http://dx.doi.org/10.1109/ICASSP.2015.7178434">IEEE Xplore</a>
+    / <a href="./papers/2015_ICASSP.pdf">Preprint</a>
+    </p></li>
+<li><p>
+    H.-A. L, L. Bruderer, H. Malmberg, F. Wadehn, and N. Zalmai,<br>
+    <strong>On sparsity by NUV-EM, Gaussian message passing, and Kalman smoothing,</strong><br>
+    <em>2016 Information Theory &amp; Applications Workshop (ITA),</em>
+    La Jolla, CA, Jan. 31 - Feb. 5, 2016.
+    <br>
+    <a href="https://doi.org/10.1109/ITA.2016.7888168">IEEE Xplore</a>
+    / <a href="./papers/2016_ITA.pdf">Preprint</a>
+    / <a href="http://arxiv.org/abs/1602.02673">arXiv:1602.02673</a>
+    </p></li>
+<li><p>
+    N. Zalmai, C. Luneau, C. Stritt, and H.-A. L.,<br>
+    <strong>Tomographic reconstruction using a new voxel-domain prior and Gaussian message passing,</strong><br>
+    <em>2016 European Signal Processing Conference (EUSIPCO),</em>
+    Budapest, Hungary, Aug. 29 - Sept. 2, 2016.
+    <br><a href="./papers/2016_EUSIPCO_Tomogr.pdf">Preprint</a>
+    /&ensp;<a href="http://www.eurasip.org/Proceedings/Eusipco/Eusipco2016/papers/1570251946.pdf">EURASIP</a>
+    /&ensp;<a href="https://doi.org/10.1109/EUSIPCO.2016.7760658">IEEE Xplore</a>
+   </p></li>
+</ul>
+The list above is very far from complete, but may give an idea of the topics.
+See also the PhD theses of 
+<a href="https://doi.org/10.3929/ethz-a-007342807">Lukas Bolliger</a> (2012),
+<a href="https://doi.org/10.3929/ethz-a-009752758">Christoph Reller</a> (2012),
+<a href="https://doi.org/10.3929/ethz-a-010538752">Lukas Bruderer</a> (2015),
+<a href="https://doi.org/10.3929/ethz-b-000176652">Nour Zalmai</a> (2017),
+<a href="https://doi.org/10.3929/ethz-b-000202042">Carina Stritt</a> (2017),
+<a href="https://doi.org/10.3929/ethz-b-000344762">Federico Wadehn</a> (2019),
+<a href="https://doi.org/10.3929/ethz-b-000549157">Boxiao Ma</a> (2021),
+<a href="https://doi.org/10.3929/ethz-b-000575227">Raphael Keusch</a> (2022),
+and
+<a href="https://doi.org/10.3929/ethz-b-000612247">Elizabeth Ren</a> (2023).
+
+<br>
+<br>
+
+In recent years, there has been an emphasis on reducing 
+nontrivial model-based inference to iterated linear-Gaussian estimation,
+e.g.:
+<ul>
+<li><p>
+    R. Keusch and H.-A. L.,<br>
+    <strong>Model-predictive control with NUP priors</strong>,<br>
+    <a href="http://arxiv.org/abs/2303.15806">arXiv:2303.15806</a>
+    </p></li>
+<li><p>
+    H.-A. L.,<br>
+    <strong>On NUP priors and Gaussian message passing,</strong><br>
+    <em>IEEE Int. Workshop on Machine Learning for Signal Processing (MLSP),</em> Sept. 2023.
+    <br><a href="https://doi.org/10.1109/MLSP55844.2023.10285859">IEEE Xplore</a>	
+    / <a href="./papers/2023MLSP.pdf">Preprint</a>
+<li><p>
+    Yun Peng Li and H.-A. L.,<br>
+    <strong>Dual NUP representations and min-maximization in factor graphs,</strong><br>
+    <em>2025 IEEE Int. Symp. on Information Theory (ISIT),</em>
+    June 2025.
+    <br><a href="https://doi.org/10.1109/ISIT63088.2025.11195661">IEEE Xplore</a>	
+    / <a href="http://arxiv.org/abs/2501.12113">arXiv:2501.12113</a>
+    </p></li>
+</ul>
+See also the <a href="https://doi.org/https://doi.org/10.3929/ethz-c-000785981">Lecture Notes</a>
+of my course <em>Model-Based Estimation and Signal Analysis</em> (held at ETH until 2025).
+
+<br>
+<br>
+
+However, many recent ideas and results have not yet been properly written up. 
+I am planning to write a longer tutorial text on factor graphs for signal processing
+<!-- that will make these recent findings accessible. -->
+<!-- that will cover also the recent progress. -->
+<!-- that will cover also these recent ideas. -->
+that will cover also these recent ideas.
+
+<br>
+<br>
+<hr>
+Last modified: March 28, 2026
+
+</main>
+</body>
+</html>

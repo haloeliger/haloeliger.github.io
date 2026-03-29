@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" href="mystyle.css">
+</head>
+
+<body>
+
+<main>
+This page belongs to
+<a href="./index.html">Andi Loeliger's home page</a>.
+
+<br>
+<br>
+<hr>
+
+
+<h2>Signal Analysis by Recursive Local Model Fitting</h2>
+
+Signal analysis by <em>local</em> model fitting seems to be an obvious idea.
+However, apart from the classical Savitzky-Golay filter,
+this idea seems to have remained largely unexplored until recently.
+
+<br>
+<br>
+
+My first steps with this approach began with the observation
+that using models with two segments ("past" and "future"),
+each with its own recursive algorithm, 
+opens interesting possibilities, e.g.:
+<ul>
+<li><p>
+    S. Graf, <strong>Smart Fire Detection,</strong><br>
+    Semester project at ISI/ETH, 2006.<br>
+    (In this project with an industry partner, we used onset detection based on recursively fitting two connected straight-line models.)
+    </p></li>
+<li><p>
+    H.-A. L., L. Bolliger, S. Korl, and C. Reller,<br>
+    <strong>Localizing, forgetting, and likelihood filtering in state-space models,</strong><br>
+    <em>2009 Information Theory and Applications Workshop,</em>
+    UCSD, La Jolla, CA, Feb. 8-13, 2009.
+    <br><a href="./papers/2009_ITA.pdf">PDF</a>
+    </p></li>
+</ul>
+However, the full power of this approach 
+(using multi-segment polynomial models)
+was discovered by 
+<a href="https://people.ee.ethz.ch/~retow/">Reto Wildhaber</a>,
+who has been developing it far beyond my imagination 
+and has been using it for amazing feats of real-world engineering:
+
+<ul>
+<li><p>
+	R.A. Wildhaber, N. Zalmai, M. Jacomet, and H.-A. L.,<br>
+    <strong>Windowed state space filters for signal detection and separation,</strong><br>
+	<em>IEEE Trans. Signal Proc.,</em> vol. 66, pp. 3768-3783, July 2018.
+    <br><a href="https://doi.org/10.1109/TSP.2018.2833804">IEEE Xplore</a>
+    / <a href="./papers/2018_TSP_Windowed.pdf">Preprint</a>
+    </p></li>
+<li><p>
+	R.A. Wildhaber, D. Bruegger, N. Zalmai, H. Malmberg, J. Goette, M. Jacomet, H. Tanner,
+	A. Haeberlin, and H.-A. L.,<br>
+	<strong>Estimation of the cardiac field in the esophagus using a multipolar esophageal catheter,</strong><br>
+	<em>IEEE Trans. Biomed. Circuits and Systems,</em> vol. 12, pp. 791-800, Aug. 2018.
+    <br><a href="https://doi.org/10.1109/TBCAS.2018.2817027">IEEE Xplore</a>
+    / <a href="./papers/2018_TBME.pdf">Preprint</a>
+    </p></li>    
+<li><p>
+	R.A. Wildhaber, E. Ren, F. Waldmann, and H.-A. L.,<br>
+    <strong>Signal analysis using local polynomial approximations,</strong><br>
+    <em>28th European Signal Processing Conference (EUSIPCO 2020),</em>
+    Amsterdam, NL, January 18-22, 2021.
+    <br><a href="https://doi.org/10.23919/Eusipco47968.2020.9287801">IEEE Xplore</a> 
+    / <a href="./papers/2020_EUSIPCO_Wildhaber.pdf">Preprint</a>
+    </p></li>
+<li><p>
+	E. Ren, G. Cid Ornelas, and H.-A. L.,<br>
+    <strong>Real-time interaural time delay estimation via onset detection,</strong><br>
+    <em>2021 IEEE Int. Conf. on Acoustics, Speech and Signal Processing (ICASSP),</em>
+    Toronto, Canada, June 6-11, 2021.
+    <br><a href="https://doi.org/10.1109/ICASSP39728.2021.9414632">IEEE Xplore</a> 
+    / <a href="./papers/2021_ICASSP.pdf">Preprint</a>
+    </p></li>
+<li><p>
+    F. Waldmann, C. Baeriswyl, R. Andonie, and R. Wildhaber,<br>
+    <strong>Onset detection of pulse-shaped bioelectrical signals using linear state space models,</strong><br> 
+    <em>Current Directions in Biomedical Engineering,</em> vol. 8, no. 2, 2022, pp. 101-104.
+    <br><a href="./papers/2022_Onset.pdf">PDF</a>
+    </p></li>
+<li><p>
+    C. Baeriswyl, F. Waldmann, A. Bertrand, and R. A. Wildhaber,<br>
+     <strong>Multi-resolution autonomous linear state space filters for N-dimensional signals,</strong><br>
+     <em>IEEE Transactions on Signal Processing,</em> vol. 73, pp. 5303-5318, 2025.
+     <br><a href="https://doi.org/10.1109/TSP.2025.3628349">IEEE Xplore</a>
+    </p></li>
+</ul>
+
+For a concise summary of this approach, 
+see Chapter 7 of the <a href="https://doi.org/https://doi.org/10.3929/ethz-c-000785981">Lecture Notes</a>
+of my course <em>Model-Based Estimation and Signal Analysis</em> (held at ETH until 2025).
+
+<br>
+<br>
+
+Pertinent software (mostly developed by Reto Wildhaber) is available here
+<a href="https://lmlib.ch/com/">here<a>.
+
+<br>
+<br>
+<hr>
+Last modified: March 28, 2026
+
+</main>
+</body>
+</html>

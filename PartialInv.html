@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" href="mystyle.css">
+</head>
+
+<body>
+
+<main>
+This page belongs to
+<a href="./index.html">Andi Loeliger's home page</a>.
+
+
+<br>
+<br>
+<hr>
+
+
+<!-- 
+<h2>Euclidean Algorithm, Berlekamp-Massey, and Partial Inverses</h2>
+ -->
+<h2>On Berlekamp-Massey, the Euclidean Algorithm, and Partial Inverses</h2>
+
+<!-- 
+    <object data="./TikzTipsV2.pdf" type="application/pdf" width="100%" height="300rem"">
+    </object>
+ -->
+
+This note is about the following papers:
+<ul>
+<li><p>
+    Jiun-Hung Yu and H.-A. L.,<br>
+    <strong>Partial inverses mod m(x) and reverse Berlekamp-Massey decoding,</strong><br>
+    <em>IEEE Trans. Inform. Theory,</em> vol. 62, pp. 6737-6756, Dec. 2016.
+    <br><a href="http://dx.doi.org/10.1109/TIT.2016.2613559">IEEE Xplore</a>
+    / <a href="./papers/2016PartInv.pdf">Preprint</a>
+    </p></li>
+<li><p>
+    Jiun-Hung Yu and H.-A. L.,<br>
+    <strong>The partial-inverse approach to linearized polynomials and Gabidulin codes 
+    with applications to network coding,</strong><br>
+    <em>IEEE Trans. Inform. Theory,</em> vol. 69, pp. 3759-3774, June 2023.
+    <br><a href="https://doi.org/10.1109/tit.2023.3236720">IEEE Xplore</a>	
+    </p></li>
+</ul>
+
+Background: 
+Reed-Solomon codes are classical error correcting codes, 
+and the <em>Euclidean algorithm</em> (Sugiyama 1975)
+and the <em>Berlekamp-Massey algorithm</em>
+are two classical decoding algorithms for such codes (and some related codes).
+These two algorithms have long been known to be related, 
+but in a complicated way.
+<!-- 
+but the relation is complicated.
+ -->
+
+<br>
+<br>
+
+<!-- 
+The first paper introduces the <em>partial-inverse problem</em>
+and shows the following:
+<ul>
+<li><p>
+    The decoding problem can be reduced to the partial-inverse problem,
+    which always has a unique solution.
+    (By contrast, the LFSR synthesis problem underlying the Berlekamp-Massey algorithm
+    does not always have a unique solution.)
+    </p></li>
+<li><p>
+    Both the Euclidean algorithm and (a version of) the Berlekamp-Massey algorithm
+    are obtained as very easy specializations of a new algorithm 
+    that solves the partial-inverse problem.
+    </p></li>
+</ul>
+The (new) partial-inverse algorithm looks easy and natural. 
+ -->
+
+The first paper introduces the <em>partial-inverse problem</em>
+and shows that both the Euclidean algorithm and (a version of) the Berlekamp-Massey algorithm
+are obtained as very easy specializations of a new algorithm 
+that solves the partial-inverse problem.
+However, the proof of this (new) partial-inverse algorithm is too complicated 
+(despite all our efforts).
+
+<br>
+<br>
+
+The second paper is about a generalization where this approach turns out to work 
+as well, but the original proof of the partial-inverse algorithm does not apply.
+In this context, Jiun-Hung Yu finally found a simpler proof
+(which also works in the original setting) 
+that is not more complicated 
+than the standard proofs of Euclidean algorithm and the Berlekamp-Massey algorithm.
+
+<br>
+<br>
+
+In consequence, the partial-inverse approach is an attractive way
+to prove and to teach the Euclidean algorithm and the Berlekamp-Massey algorithm
+simultaneously.
+
+<br>
+<br>
+<hr>
+Last modified: March 28, 2026
+
+</main>
+</body>
+</html>

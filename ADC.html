@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<link rel="stylesheet" href="mystyle.css">
+</head>
+
+<body>
+
+<main>
+This page belongs to
+<a href="./index.html">Andi Loeliger's home page</a>.
+
+
+<br>
+<br>
+<hr>
+
+
+<h2>Analog-to-Digital Conversion by Digital Control</h2>
+
+Analog-to-digital conversion 
+at high speed or with high precision, and with a limited power budget, 
+remains challenging.
+This note is about a new conversion principle that started 
+with an idea by Georg Wilckens and was developed much further by Hampus Malmberg:
+
+<ul>
+<li><p>
+    H.-A. L. and G. Wilckens,<br>
+    <strong>Control-based analog-to-digital conversion without sampling and quantization,</strong><br>
+    <em>2015 Information Theory &amp; Applications Workshop (ITA),</em>
+    San Diego, CA, Feb. 1-6, 2015.
+    <br><a href="http://dx.doi.org/10.1109/ITA.2015.7308975">IEEE Xplore</a>
+    / <a href="./papers/2015_ITA.pdf">Preprint</a>
+    </p></li>
+<!-- 
+<li><p>
+    H.-A. L., H. Malmberg, and G. Wilckens,<br>
+    <strong>Control-bounded analog-to-digital conversion: transfer function analysis, 
+    proof of concept, and digital filter implementation,</strong><br>
+    <a href="http://arxiv.org/abs/2001.05929">arXiv:2001.05929</a>
+    </p></li>
+ -->
+<li><p>
+    H. Malmberg, G. Wilckens, and H.-A. L.,<br>
+    <strong>Control-bounded analog-to-digital conversion,</strong><br>
+    <em>Circuits, Systems, and Signal Processing,</em> 2022.
+    <br><a href="./papers/2021_CSSP.pdf">pdf</a>
+    </p></li>
+<li><p>
+	H. Malmberg, T. Mettler, T. Burger, F. Feyling, and H.-A. L.,<br>
+    <strong>Calibrating control-bounded ADCs,</strong><br>
+    <a href="http://arxiv.org/abs/2211.06741">arXiv:2211.06741</a>, 2022.
+    </p></li>
+<li><p>
+    F. Feyling, H. Malmberg, C. Wulff, H.-A. L., and T. Ytterdal,<br>
+    <strong>Design and analysis of the leapfrog control-bounded A/D converter,</strong><br>
+    <em>IEEE Trans. Very Large Scale Integration (VLSI) Systems,</em> vol. 32, pp. 79-88, Jan. 2024.
+    <br><a href="https://doi.org/10.1109/TVLSI.2023.3320279">IEEE Xplore</a>	
+    </p></li>
+<li><p>
+    H. Malmberg, F. Feyling, and J. M. de la Rosa,<br>
+    <strong>A control-bounded quadrature leapfrog ADC,</strong><br> 
+    <em>IEEE Trans. on Circuits and Systems I: Regular Papers,</em> vol. 71, pp. 2483-2496, June 2024.
+    <br><a href="https://doi.org/10.1109/TCSI.2024.3366330">IEEE Xplore</a>	
+    </p></li>
+<li><p>
+    F. Feyling, H. Malmberg, C. Wulff, and T. Ytterdal,<br>
+     <strong>A compiled 7th-order leapfrog ADC in 130 nm CMOS,</strong><br>  
+     <em>Circuits, Systems, and Signal Processing,</em> Oct. 2025, 
+    <br><a href="https://doi.org/10.1007/s00034-025-03370-9">doi.org/10.1007/s00034-025-03370-9</a>	
+    </p></li>
+</ul>
+
+The idea is to feed the analog signal(s) into a continuous-time
+linear amplifying filter that is stabilized by digital control,
+from which a digital filter computes an estimate of the analog signal.
+Such converters may be viewed as (nontrivial) generalizations
+of continuous-time sigma-delta converters, 
+but the conceptual perspective is entirely different
+and opens a much larger design space. 
+
+The conversion principle is quite simple 
+(unless you try to understand it in terms of traditional concepts),
+hardware friendly, and amenable to digital calibration.
+Some first chip designs were carried out by Fredrik Feyling.
+
+<br>
+<br>
+
+Beyond the examples worked out in the papers above, 
+<a href="https://doi.org/10.3929/ethz-b-000469192">Hampus's PhD thesis</a>
+points to a more general vision of 
+sensing and acting at the interface between analog and digital.
+<!-- 
+Hampus's work points to a more general vision of 
+sensing and acting at the digital-analog interface.
+Check <a href="https://doi.org/10.3929/ethz-b-000469192">Hampus's PhD thesis</a>
+and his web page for more.
+-->
+
+<br>
+<br>
+<hr>
+Last modified: March 28, 2026
+
+</main>
+</body>
+</html>
