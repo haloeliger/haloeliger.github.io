@@ -16,7 +16,7 @@ who helped me a lot to get started with Rust.
 
 - [For Loops and Iterators](##for-loops-and-iterators)
 - [BLAS and OxiBLAS](##blas-and-oxiblas)
-- [Abstract Matrix Operations: MatrixOps](##abstract-matrix-operations:-matrixops)
+- [Abstract Matrix Operations: MatrixOps](##abstract-matrix-operations-matrixops)
 
 
 ## For Loops and Iterators
