@@ -14,9 +14,9 @@ Many thanks go to Hampus Malmberg, Hugo Aguettaz, and Cyrill Achermann,
 who helped me a lot to get started with Rust.
 
 
-- [For Loops and Iterators](##for-loops-and-iterators)
-- [BLAS and OxiBLAS](##blas-and-oxiblas)
-- [Abstract Matrix Operations: MatrixOps](##abstract-matrix-operations-matrixops)
+- [For Loops and Iterators](#for-loops-and-iterators)
+- [BLAS and OxiBLAS](#blas-and-oxiblas)
+- [Abstract Matrix Operations: MatrixOps](#abstract-matrix-operations-matrixops)
 
 
 ## For Loops and Iterators
@@ -220,7 +220,7 @@ Reborrowing with
 ## Abstract Matrix Operations: MatrixOps
 
 So far, this has all been standard. 
-By contrast, MatrixOps is something I did myself 
+By contrast, MatrixOps is something I have been writing myself 
 in order to address a problem that frequently occurs in my work,
 viz., to implement algorithms so that they work efficiently
 with different matrices or linear operators 
