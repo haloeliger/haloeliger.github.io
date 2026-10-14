@@ -1,20 +1,21 @@
 # On Elementary Matrix Computations in Rust #
-### by Hans-Andrea Loeliger ###
 
-*Version 0.1, Oct. 5, 2026*
+*Version 1.0, Oct. 11, 2026*
 
-Like many other programmers, I am a big fan of Rust. 
-However, learning Rust and using it properly is not so easy.
+I am a big fan of Rust. 
+However, like many others, I found that learning Rust 
+is not so easy.
 
-In this note, I discuss 
-elementary matrix-times-vector and matrix-times-vector multiplications,
-which are the computational backbone of most scientific computing and neural networks.
+In this note, I summarize what I learned about
+matrix-times-vector and matrix-times-matrix multiplications,
+which are the computational backbone of most scientific computing.
 
 Many thanks go to Hampus Malmberg, Hugo Aguettaz, and Cyrill Achermann,
 who helped me a lot to get started with Rust.
 
 
 - [For Loops and Iterators](#for-loops-and-iterators)
+- [Generics](#generics)
 - [BLAS and OxiBLAS](#blas-and-oxiblas)
 - [Abstract Matrix Operations: MatrixOps](#abstract-matrix-operations-matrixops)
 
@@ -23,53 +24,46 @@ who helped me a lot to get started with Rust.
 
 Before considering matrices, let's look at some 
 basic computations with vectors (in the sense of linear algebra).
-Suppose you want to multiply each element of a vector by some constant.
+Suppose you want to multiply each element of a vector by some scale factor.
 The obvious way (if you come from C/C++) goes like this:
-```rust
-    let s = 1.1;
-    let b = &mut[ 1.0, 2.0, 3.0 ];
-    for i in 0..b.len() {
-        b[i] *= s;
-    }
+```ignore
+// the vector, e.g.:
+let b = &mut[ 1.0, 2.0, 3.0 ];
+// the scale factor, e.g.:
+let s = 1.1;
+// the multiplication:
+for i in 0..b.len() {
+	b[i] *= s;
+}
 ```
-In more idiomatic Rust, the for loop is replaced by
-```rust
-    b.iter_mut().for_each( |bi| *bi *= s );
+In more idiomatic Rust, the **for** loop is replaced by
+```ignore
+    b.iter_mut().for_each( |pbi| *pbi *= s );
 ```
-In this simple example, the compiler probably produces essentially the same code 
-for both versions. However, in less trivial examples, the compiler
-may be able to produce more efficient code from the iterator version.
 
 As a second example, 
 suppose you want to add a scaled version of a vector to some other vector,
 like this:
-```rust
-    let s = 1.1;
-    const N: usize = 3;
-    let b: &[f64; N] = &[ 1.0, 2.0, 3.0 ];
-    let c = &mut[0.0; N];
-    for i in 0..N {
-        c[i] = s * b[i];
-    }
-```
-The for loop in this example can be replaced by
-```rust
-    b.iter().zip(c.iter_mut()).for_each( |(bi,ci)| *ci = s * bi );
-```
-
-As a final example, the following function computes 
-the dot product of two vectors: 
-```rust
-fn dotproduct(a: &[f64], b: &[f64]) -> f64 {
-    assert_eq!(a.len(), b.len(), "mismatched lengths");
-    a.iter().zip(b.iter()).fold(0.0, |sum, (ai, bi)| sum + ai*bi)
+```ignore
+const N: usize = 3;
+let b: &[f64; N] = &[ 1.0, 2.0, 3.0 ];
+let s = 1.1;
+let c = &mut[0.0; N];
+for i in 0..N {
+	c[i] = s * b[i];
 }
 ```
-However, it may be preferable to implement this function 
-for all numeric types simultaneously, like this:
-```rust
-fn dotproduct <T: Scalar> (a: &[T], b: &[T]) -> T
-{
+The **for** loop in this example can be replaced by
+```ignore
+    b.iter().zip(c.iter_mut()).for_each( |(pbi, pci)| *pci = s * *pbi );
+```
+
+## Generics
+
+The following function computes the dot product of two vectors 
+for all numeric types simultaneously:
+```ignore
+fn dotproduct <T: Scalar> (a: &[T], b: &[T]) -> T {
     assert_eq!(a.len(), b.len(), "mismatched lengths");
     let mut sum = T::zero();
     for i in 0..a.len() {
@@ -78,13 +72,20 @@ fn dotproduct <T: Scalar> (a: &[T], b: &[T]) -> T
     sum
 }
 ```
-In this case, getting the iterator version right is challenging.
+Or more compactly like this:
+```ignore
+fn gendotproduct2 <T: Scalar> (a: &[T], b: &[T]) -> T {
+    assert_eq!(a.len(), b.len(), "mismatched lengths");
+    a.iter().zip(b.iter()).fold( T::zero(), |sum, (pai, pbi)| sum + *pai * *pbi )
+}
+```
+
 
 
 ## BLAS and OxiBLAS
 
 Matrix-times-vector and matrix-times-matrix multiplications
-can, of course, be written with for loops or with iterators as above.
+can, of course, be written with **for** loops or with iterators as above.
 However, even the best compilers (for any programming language) 
 cannot by themselves translate such naive implementations
 into efficient code for modern hardware. 
@@ -122,14 +123,15 @@ but are rich pointers to it.
 
 The ability of `MatRef` to work with general strides for both rows and columns is crucial
 for the flexibility and efficiency of OxiBLAS.
-`MatMut` is essentially the same struct as `MatRef`, 
-except that the column stride of `MatMut` is fixed to 1 
+`MatMut` is essentially the same struct as `MatRef`,
+but it allows writing into the matrix and 
+the column stride is fixed to 1 
 (in agreement with the traditional FORTRAN convention). 
 
 For example, the BLAS function `gemm` computes `matrix_c = alpha * matrix_a * matrix_b + beta * matrix_c`.
-In OxiBLAS, `gemm()` is declared roughly as follows:
+In OxiBLAS, `gemm` is declared roughly as follows:
 
-```rust
+```ignore
 pub fn gemm<T>(
     alpha: T,
     matrix_a: MatRef<T>,
@@ -141,10 +143,10 @@ pub fn gemm<T>(
 
 For storing the actual matrix entries, OxiBLAS provides the type `Mat`,
 which stores the entries in the FORTRAN convention 
-(i.e., column by column, with column stride = 1).
+(i.e., column by column, with column stride 1).
 
-Example 1:
-```rust
+Example with Mat and MatRef:
+```ignore
 use oxiblas::prelude::*;
 
 let a = Mat::from_rows(&[
@@ -157,8 +159,8 @@ let a_view: MatRef<f64> = a.as_ref();
 assert_eq!( a_view[(1,0)], 10.0 );
 ```
 
-Example 2:
-```rust
+Example with Mat and MatMut:
+```ignore
 use oxiblas::prelude::*;
 
 let mut b: Mat<f64> = Mat::zeros(3, 2);
@@ -167,8 +169,8 @@ b_view[(2,1)] = 2.0;
 assert_eq!( b[(2,1)], 2.0 );
 ```
 
-Example 3: calling an OxiBLAS function:
-```rust
+Example of calling `gemm`:
+```ignore
 use oxiblas::prelude::*;
 
 let a = Mat::from_rows(&[
@@ -182,10 +184,13 @@ let b = Mat::from_rows(&[
 	]);
 let mut c: Mat<f64> = Mat::zeros(2, 2);
 gemm(1.0, a.as_ref(), b.as_ref(), 0.0, c.as_mut());
+assert_eq!( c[(1,0)], 14.0 );
 ```
 
-However, matrices need not be stored as `Mat`. For example:
-```rust
+However, matrices need not be stored as `Mat`; slices will do.
+(And remember that MatMut assumes the FORTRAN convention).
+For example:
+```ignore
 use oxiblas::prelude::*;
 
 const A_NROWS: usize = 2;
@@ -212,41 +217,38 @@ let mut c_view = MatMut::from_strided(c_tr, C_NROWS, C_NCOLS, C_NCOLS).unwrap();
 
 gemm(1.0, a_view, b_view, 0.0, c_view.rb_mut());
 assert_eq!( c_view[(1,0)], 14.0 );
+assert_eq!( c_tr[1], 14.0 );
 ```
-Reborrowing with 
-`rb_mut()` is required here to satisfy the borrow checker.
+In this example, reborrowing `c_view` with 
+`rb_mut()` is required in the call of `gemm` to satisfy the borrow checker.
 
 
 ## Abstract Matrix Operations: MatrixOps
 
-So far, this has all been standard. 
-By contrast, MatrixOps is something I have been writing myself 
+All of the above is standard.
+By contrast, [MatrixOps](https://github.com/haloeliger/MatrixOps) is something I wrote myself 
 in order to address a problem that frequently occurs in my work,
-viz., to implement algorithms so that they work efficiently
-with different matrices or linear operators 
-that may have specialized low-complexity implementations. 
+viz., to implement algorithms so that they 
+work efficiently not only with generic matrices, but 
+also with linear operators 
+that have specialized low-complexity implementations. 
 To this end, MatrixOps defines the traits `MatrixOps1` and `MatrixOps2`
 for matrix-times-vector multiplications and matrix-times-matrix multiplications,
-respecively. 
+respectively.
 For example,
-`MatrixOps1` contains the method 
-```rust
+`MatrixOps1` defines the method 
+```ignore
 // vct_c =  self * vct_b
 fn mult_vct(&self, vct_b: &[Float], vct_c: &mut [Float]);
  ```
-and `MatrixOps2` contains the method 
-```rust
+and `MatrixOps2` defines the method 
+```ignore
 // mat_c = alpha * self * mat_b + beta * mat_c
 fn mult_mat_scaled_addto(&self, alpha: Float, mat_b: &MatRef<Float>, beta: Float, mat_c: &mut MatMut<Float>);
  ```
 which is an abstract version of the BLAS function `gemm`.
-Note that only the matrix `self` is abstract while the operands `vct_b` and `vct_c`
-are slices and the operands `mat_b` and `mat_c` are OxiBLAS views.
+Note that only the operator `self` is abstract while the operands 
+and the results are slices (in `MatrixOps1`) or OxiBLAS views (in `MatrixOps2`).
 MatrixOps also provides an implementation of these traits 
-for generic matrices using OxiBLAS.
-
-The traits in MatrixOps should be slim because
-using an algorithm that is written with these abstractions
-requires the user to implement `MatrixOps1` or `MatrixOps2` or both 
-for the specific matrices of the application.
-
+for generic matrices using OxiBLAS. 
+See the documentation of [MatrixOps](https://github.com/haloeliger/MatrixOps) for examples.
