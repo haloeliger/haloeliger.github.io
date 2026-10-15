@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Traits for the multiplication of vectors and matrices by abstract matrices (i.e., linear operators), with implementations for generic OxiBLAS matrices."><title>MatrixOps::matrixops - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-0c87338a.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="MatrixOps" data-themes="" data-resource-suffix="" data-rustdoc-version="1.99.0 (b940084d7 2026-09-28)" data-channel="1.99.0" data-search-js="search-cf4fc35e.js" data-stringdex-js="stringdex-b5109af9.js" data-settings-js="settings-170eb4bf.js" ><script src="../../static.files/storage-41dd4d93.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../static.files/main-417ebf0a.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-9f56287d.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Module matrixops</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../MatrixOps/index.html">Matrix<wbr>Ops</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module matrixops</a></h2><h3><a href="#structs">Module Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#traits" title="Traits">Traits</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="../index.html">In crate Matrix<wbr>Ops</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">MatrixOps</a></div><h1>Module <span>matrixops</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/MatrixOps/matrixops.rs.html#1-674">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Traits for the multiplication of vectors and matrices by abstract matrices
+(i.e., linear operators),
+with implementations for generic OxiBLAS matrices.</p>
+<p><em>Oct. 15, 2026, H.-A. L.</em></p>
+<p>Only the operators are abstract;
+vector operands and results are slices, matrix operands and results are OxiBLAS matrices.</p>
+<p>Writing an algorithm in terms of these abstract operators
+enables users of that algorithm to provide their own specialized methods
+for the actual operator.</p>
+<p>Using such an algorithm requires the implementation of the traits
+<code>MatrixOps1</code> or <code>MatrixOps2</code> or both (= <code>MatrixOps</code>).
+As examples, such implementations are provided for generic matrices and for diagonal matrices.</p>
+<p>Trait <code>MatrixOps1</code> defines the following methods:</p>
+<div class="example-wrap"><pre class="language-text"><code>nrows:                  number of rows
+ncols:                  number of columns
+mult_vct:               vct_c =  self * vct_b
+mult_vct_addto:         vct_c += self * vct_b
+mult_vct_scaled_addto:  vct_c += alpha * self * mat_b + beta * vct_c
+tmult_vct:              vct_c =  self_t * vct_b
+tmult_vct_addto:        vct_c += self_t * vct_b
+tmult_vct_scaled_addto: vct_c += alpha * self_t * mat_b + beta * vct_c
+
+where `vct_` denotes a vector (= a slice of scalars), `_t` means transposed
+and `self` is the abstract matrix.</code></pre></div>
+<p>Trait <code>MatrixOps2</code> defines the following methods:</p>
+<div class="example-wrap"><pre class="language-text"><code>mult_mat:                mat_c =  self * mat_b
+mult_mat_addto:          mat_c += self * mat_b
+mult_mat_scaled_addto:   mat_c =  alpha * self * mat_b + beta * mat_c
+tmult_mat:               mat_c =  self_t * mat_b
+tmult_mat_addto:         mat_c += self_t * mat_b
+tmult_mat_scaled_addto:  mat_c =  alpha * self_t * mat_b + beta * mat_c
+
+where `mat_` denotes an OxiBLAS matrix, `_t` means transposed, 
+and `self` is the abstract matrix.</code></pre></div>
+<p><br />
+<strong>Example:</strong> <code>vct_y = mat2 * mat1 * vct_x</code> with abstract <code>mat1</code> and <code>mat2</code>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>oxiblas::prelude::<span class="kw-2">*</span>;
+<span class="kw">mod </span>matrixops;
+<span class="kw">use </span>matrixops::<span class="kw-2">*</span>;
+
+<span class="kw">fn </span>mult_mult_vct(
+	mat2: <span class="kw-2">&amp;</span><span class="kw">dyn </span>MatrixOps1&lt;f64&gt;,
+	mat1: <span class="kw-2">&amp;</span><span class="kw">dyn </span>MatrixOps1&lt;f64&gt;,
+	vct_x: <span class="kw-2">&amp;</span>[f64],
+	vct_y: <span class="kw-2">&amp;mut</span>[f64],
+	vct_wsp: <span class="kw-2">&amp;mut</span>[f64], <span class="comment">// workspace with same size as vct_x and vct_y
+</span>) {
+	mat1.mult_vct(vct_x, vct_wsp);
+	mat2.mult_vct(vct_wsp, vct_y);
+}
+
+<span class="kw">let </span>mat_a = Mat::from_rows( <span class="kw-2">&amp;</span>[
+   	<span class="kw-2">&amp;</span>[   <span class="number">1.0</span>,   <span class="number">2.0 </span>],
+    <span class="kw-2">&amp;</span>[ <span class="number">100.0</span>, <span class="number">200.0 </span>],
+   	]);
+<span class="kw">let </span>mat_b = DiagonalMatrixOps {
+    	diag: <span class="kw-2">&amp;</span>[ <span class="number">1.0</span>, <span class="number">30.0 </span>],
+	};
+<span class="kw">let </span>vct_x = <span class="kw-2">&amp;</span>[ <span class="number">10.0</span>, <span class="number">0.1</span>];
+<span class="kw">let </span>vct_y = <span class="kw-2">&amp;mut</span>[ <span class="number">0.0</span>; <span class="number">2</span>];
+<span class="kw">let </span>vct_wsp = <span class="kw-2">&amp;mut</span>[ <span class="number">0.0</span>; <span class="number">2</span>];
+ 
+<span class="comment">// vct_y = mat_a * mat_b * vct_x:
+</span>mult_mult_vct( <span class="kw-2">&amp;</span>mat_a.as_ref(), <span class="kw-2">&amp;</span>mat_b, vct_x, vct_y, vct_wsp );
+ 
+<span class="comment">// vct_y = mat_b * mat_a * vct_x:
+</span>mult_mult_vct( <span class="kw-2">&amp;</span>mat_b, <span class="kw-2">&amp;</span>mat_a.as_ref(), vct_x, vct_y, vct_wsp );</code></pre></div></div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.DiagonalMatrixOps.html" title="struct MatrixOps::matrixops::DiagonalMatrixOps">Diagonal<wbr>Matrix<wbr>Ops</a></dt><dd>diagonal matrix as MatrixOp</dd></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.MatrixOps.html" title="trait MatrixOps::matrixops::MatrixOps">Matrix<wbr>Ops</a></dt><dt><a class="trait" href="trait.MatrixOps1.html" title="trait MatrixOps::matrixops::MatrixOps1">Matrix<wbr>Ops1</a></dt><dt><a class="trait" href="trait.MatrixOps2.html" title="trait MatrixOps::matrixops::MatrixOps2">Matrix<wbr>Ops2</a></dt></dl></section></div></main></body></html>

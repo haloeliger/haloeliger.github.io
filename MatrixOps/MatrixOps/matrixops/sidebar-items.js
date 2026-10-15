@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["DiagonalMatrixOps"],"trait":["MatrixOps","MatrixOps1","MatrixOps2"]};

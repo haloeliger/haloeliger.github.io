@@ -1,0 +1,1 @@
+rd_("AoReturns the argument unchanged.BaCalls <code>U::from(self)</code>.ClTraits for the multiplication of vectors and matrices by \xe2\x80\xa6EeExample: <code>vct_y = mat2 * mat1 * vct_x</code> with abstract <code>mat1</code> \xe2\x80\xa6Akdiagonal matrix as MatrixOp")
