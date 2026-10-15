@@ -1,6 +1,6 @@
 # On Elementary Matrix Computations in Rust #
 
-*Version 1.0, Oct. 11, 2026*
+*Version 1.0, Oct. 15, 2026*
 
 I am a big fan of Rust. 
 However, like many others, I found that learning Rust 
