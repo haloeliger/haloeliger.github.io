@@ -1,2 +1,0 @@
-window.ALL_CRATES = ["MatrixOps","bytemuck","bytemuck_derive","libc","num_complex","num_traits","oxiblas","oxiblas_blas","oxiblas_core","oxiblas_lapack","oxiblas_matrix","oxiblas_sparse","proc_macro2","quote","syn","unicode_ident"];
-//{"start":21,"fragment_lengths":[11,11,18,7,14,13,10,15,15,17,17,17,14,8,6,16]}

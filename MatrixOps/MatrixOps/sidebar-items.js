@@ -1,1 +1,0 @@
-window.SIDEBAR_ITEMS = {"fn":["main","mult_mult_vct"],"mod":["matrixops"]};
