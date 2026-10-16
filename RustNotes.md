@@ -145,7 +145,7 @@ For storing the actual matrix entries, OxiBLAS provides the type `Mat`,
 which stores the entries in the FORTRAN convention 
 (i.e., column by column, with column stride 1).
 
-Example with Mat and MatRef:
+#### Example with Mat and MatRef:
 ```ignore
 use oxiblas::prelude::*;
 
@@ -159,7 +159,7 @@ let a_view: MatRef<f64> = a.as_ref();
 assert_eq!( a_view[(1,0)], 10.0 );
 ```
 
-Example with Mat and MatMut:
+#### Example with Mat and MatMut:
 ```ignore
 use oxiblas::prelude::*;
 
@@ -169,7 +169,7 @@ b_view[(2,1)] = 2.0;
 assert_eq!( b[(2,1)], 2.0 );
 ```
 
-Example of calling `gemm`:
+#### Example of calling `gemm`:
 ```ignore
 use oxiblas::prelude::*;
 
@@ -187,8 +187,10 @@ gemm(1.0, a.as_ref(), b.as_ref(), 0.0, c.as_mut());
 assert_eq!( c[(1,0)], 14.0 );
 ```
 
-However, matrices need not be stored as `Mat`; slices will do.
-(And remember that MatMut assumes the FORTRAN convention).
+#### Matrices Stored as Slices
+
+Matrices need not be stored as `Mat`; slices will do.
+(But remember that MatMut assumes the FORTRAN convention).
 For example:
 ```ignore
 use oxiblas::prelude::*;
