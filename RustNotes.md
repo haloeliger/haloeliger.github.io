@@ -241,7 +241,7 @@ For example,
 // vct_c =  self * vct_b
 fn mult_vct(&self, vct_b: &[Float], vct_c: &mut[Float]);
  ```
-(where `Float` is a generic numerical scalar) 
+(where `Float` is a generic numerical scalar), 
 and `MatrixOps2` defines the method 
 ```ignore
 // mat_c = alpha * self * mat_b + beta * mat_c
