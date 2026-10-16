@@ -1,6 +1,6 @@
 # On Elementary Matrix Computations in Rust #
 
-*Version 1.0, Oct. 15, 2026*
+*Version 1.1, Oct. 16, 2026*
 
 I am a big fan of Rust. 
 However, like many others, I found that learning Rust 
@@ -239,8 +239,9 @@ For example,
 `MatrixOps1` defines the method 
 ```ignore
 // vct_c =  self * vct_b
-fn mult_vct(&self, vct_b: &[Float], vct_c: &mut [Float]);
+fn mult_vct(&self, vct_b: &[Float], vct_c: &mut[Float]);
  ```
+(where `Float` is a generic numerical scalar) 
 and `MatrixOps2` defines the method 
 ```ignore
 // mat_c = alpha * self * mat_b + beta * mat_c
